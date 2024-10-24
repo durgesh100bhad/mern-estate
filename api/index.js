@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'; 
 import userRouter from './routes/user.route.js'
+import authRouter from './routes/auth.route.js'
 dotenv.config(); 
 
 mongoose.connect(process.env.MONGO)
@@ -13,6 +14,8 @@ mongoose.connect(process.env.MONGO)
  }); 
 const app= express(); 
 
+
+app.use(express.json());
 
 app.listen(3000,()=>{
     console.log("Server is running at port 3000!!!"); 
@@ -35,3 +38,5 @@ app.listen(3000,()=>{
 //isme pehle api/user route tk  jaaenge and phir 
 //userRouter me jitni bhi routes hongi vo sb tk jaaenge 
 app.use("/api/user", userRouter); 
+
+app.use("/api/auth", authRouter);
